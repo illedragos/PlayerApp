@@ -1,0 +1,21 @@
+<div mat-dialog-content>
+    <div class="h4">
+      <b>{{ data.message }}</b>
+    </div>
+    <div *ngIf="data.description">
+      {{ data.description }}
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button
+      mat-flat-button
+      [color]="data.buttonColor || 'warn'"
+      [mat-dialog-close]="true"
+    >
+      <ng-container *ngIf="data.icon">
+        <mat-icon>{{ data.icon }}</mat-icon>
+      </ng-container>
+      {{ data.buttonLabel }}
+    </button>
+    <button mat-button color="primary" (click)="onCancel()">Cancel</button>
+  </div>

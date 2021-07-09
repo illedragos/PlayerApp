@@ -1,0 +1,50 @@
+<form [formGroup]="playerDetailsForm">
+    <div mat-dialog-title>
+      <span>{{ data?.player?.externalId ? data.player.name : "Add player" }}</span>
+    </div>
+    <div mat-dialog-content>
+      <mat-form-field appearance="outline">
+        <mat-label></mat-label>
+        <input matInput formControlName="name" placeholder="Player`s name" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" placeholder="Email" />
+      </mat-form-field>
+      <!-- <mat-form-field appearance="outline">
+        <mat-label>Date of birth</mat-label>
+        <input matInput formControlName="dateOfBirth" placeholder="Date of birth" />
+      </mat-form-field> -->
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput formControlName="dateOfBirth" [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <!-- <mat-form-field appearance="outline">
+        <mat-label>Rank</mat-label>
+        <input matInput formControlName="rank" placeholder="Player`s rank" />
+      </mat-form-field> -->
+      <mat-form-field appearance="fill">
+        <mat-label>Player`s rank</mat-label>
+        <mat-select formControlName="rank">
+          <mat-option *ngFor="let rank of playerRanks" [value]="rank.value">
+            {{rank.displayName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions>
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="!playerDetailsForm.valid"
+        [mat-dialog-close]="playerDetailsForm.value"
+      >
+        <mat-icon>checked</mat-icon>
+        done
+      </button>
+      <button mat-button color="primary" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>

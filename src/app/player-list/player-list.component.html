@@ -1,0 +1,24 @@
+<div class="header-div">
+    <H1>List of my favorites tennis players</H1>
+</div>
+
+<div class="main-div" *ngFor="let player of players">
+<mat-card >
+    <!-- <div class="row"> -->
+        <mat-card-title>{{player.name}}	</mat-card-title>
+        <mat-card-subtitle>
+            Rank :{{player.rank}}</mat-card-subtitle>
+    <!-- <div class="element">{{player.externalId}}</div> -->
+    <!-- <div class="element"></div> -->
+    <mat-card-content>
+    <div >Email {{player.email}}</div>
+    <div >Date of birth : {{player.dateOfBirth}}</div>
+    <div>Age: {{player.age}}</div>
+</mat-card-content>
+    <!-- <div class="element">{{player.rank}}</div> -->
+    <button (click)="onDeletePlayer(player)">Delete</button>
+    <button (click)="onUpdatePlayer(player.externalId,player)">Update</button>
+    <!-- </div> -->
+</mat-card>
+</div>
+<button class="button big-btn" (click)="onAddPlayer()">Add</button>
