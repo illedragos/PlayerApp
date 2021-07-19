@@ -4,7 +4,9 @@ import { PlayerRequestDTO, PlayerResponseDTO } from '../interfaces';
 import { MatDialog } from '@angular/material/dialog';
 import { PlayerAddDialogComponent } from '../player-add-dialog/player-add-dialog.component';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
-
+import { NavigationExtras } from '@angular/router';
+import { Router } from '@angular/router';
+import { PlayerUpdateDialogComponent } from '../player-update-dialog/player-update-dialog.component';
 
 @Component({
   selector: 'app-player-list',
@@ -12,16 +14,21 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
   styleUrls: ['./player-list.component.css']
 })
 export class PlayerListComponent implements OnInit {
+
   players:PlayerResponseDTO[];
 
-  constructor(private crudService:CrudService, public dialog: MatDialog) { }
+  constructor(private crudService:CrudService, public dialog: MatDialog, private router:Router) { 
+
+
+  }
 
   ngOnInit(): void {
+    
   this.crudService.getPlayers().subscribe(res=>
     {this.players=res;
     console.log(res);
     });
-
+    
   }
 
   onAddPlayer() {
@@ -62,7 +69,7 @@ export class PlayerListComponent implements OnInit {
       });
     }
 
-    onUpdatePlayer(playerExtId:string,player:PlayerRequestDTO){
+    onUpdatePlayer(playerId:number,player:PlayerRequestDTO){
       const dialogRef = this.dialog.open(PlayerAddDialogComponent, {
       data:{player},
         autoFocus: false,
@@ -70,13 +77,38 @@ export class PlayerListComponent implements OnInit {
       dialogRef
       .afterClosed()
       .subscribe((result : PlayerRequestDTO)=>{
-        result && this.crudService.updatePlayer(playerExtId,result)
+        console.log(result);
+        result && this.crudService.updatePlayerWithId(playerId,result)
       .subscribe(res=>{
         console.log(res);
         this.crudService.getPlayers().subscribe(response=>this.players=response);
       })}
       )
     }
-    
 
+
+    onUpdatePlayerDialog(playerId:number, player:PlayerResponseDTO){
+
+      let dialogRef = this.dialog.open(PlayerUpdateDialogComponent, {
+        height: '400px',
+        width: '600px',
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+       
+      });
+      
+      // dialogRef.close('Pizza!');
+    }
+
+    goToUpdatePlayerPage(player:PlayerResponseDTO){
+    
+    let navigationExtras: NavigationExtras = {
+      state: {
+        player: player
+      }
+    };
+
+    this.router.navigate([`/updatePlayer/${player.externalId}`], navigationExtras);}
+    
 }

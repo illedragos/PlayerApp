@@ -46,6 +46,7 @@ export class PlayerAddDialogComponent implements OnInit {
   }
 
   onCancel(): void {
+    console.log(this.data.player.name);
     this.dialogRef.close();
   }
 

@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,13 +22,19 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
+import { PlayerAddPageComponent } from './player-add-page/player-add-page.component';
+import { PlayerUpdatePageComponent } from './player-update-page/player-update-page.component';
+import { PlayerUpdateDialogComponent } from './player-update-dialog/player-update-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayerListComponent,
     PlayerAddDialogComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    PlayerAddPageComponent,
+    PlayerUpdatePageComponent,
+    PlayerUpdateDialogComponent
   ],
   imports: [
     BrowserModule,

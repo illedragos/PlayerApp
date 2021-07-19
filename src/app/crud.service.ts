@@ -27,4 +27,16 @@ export class CrudService {
     updatePlayer(playerExtId:string,player:PlayerRequestDTO):Observable<any>{
       return this.httpClient.put(this.API_URL + '/' +playerExtId,player);
     }
+
+
+    updatePlayerWithId(playerID:number,player:PlayerRequestDTO):Observable<any>{
+      return this.httpClient.put(this.API_URL + '/' +playerID,player);
+    }
+
+
+    getPlayer(playerId:number):Observable<any>{
+      return this.httpClient.get(this.API_URL+'/' + playerId);
+    }
+
+    
 }
